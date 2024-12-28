@@ -1,0 +1,19 @@
+<h2>Todos</h2>
+<!-- <p *ngIf="!todoItems().length">Loading...</p> -->
+ @if (!todoItems().length) {
+    <p>Loading.....</p>
+ }
+
+ <form>
+    <label for="">Filter todos</label>
+ <input name = "searchTerm" [(ngModel)] = "searchTerm" placeholder="Search todos..." />
+ </form>
+ 
+<ul class="todos">
+    @for (todo of todoItems() | filterTodo:searchTerm(); track todo.id){
+    <li class="todo_item"> 
+       <input id="todo-{{ todo.id }}" type="checkbox" [value] = "todo.completed" /> 
+       <label for="todo-{{todo.id}}">{{ todo.title }}</label>
+    </li>
+}
+</ul>
